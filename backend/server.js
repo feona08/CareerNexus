@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
-
+require("dotenv").config();
 const studentRoutes = require("./routes/studentRoutes");
 const companyRoutes = require("./routes/companyRoutes");
 const adminRoutes = require("./routes/adminRoutes");
@@ -20,7 +20,7 @@ app.use("/application", applicationRoutes);
 app.use("/job", jobRoutes);
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/CareerNexusDB")
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("✅ MongoDB Connected Successfully");
   })
