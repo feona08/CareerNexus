@@ -19,7 +19,7 @@ function StudentRegistration({ goToLogin }) {
 
   const registerStudent = async () => {
     try {
-      const response = await fetch("http://localhost:5000/student/register", {
+      const response = await fetch("https://careernexus-backend-2026.onrender.com/student/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

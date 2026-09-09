@@ -41,7 +41,7 @@ function StudentDashboard({ student, logout }) {
   /* ---------------- LOAD JOBS ---------------- */
 
   useEffect(() => {
-    fetch("http://localhost:5000/job/all")
+    fetch("https://careernexus-backend-2026.onrender.com/job/all")
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -58,7 +58,7 @@ function StudentDashboard({ student, logout }) {
   useEffect(() => {
     if (!email) return;
 
-    fetch("http://localhost:5000/application/all")
+    fetch("https://careernexus-backend-2026.onrender.com/application/all")
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -201,7 +201,7 @@ function StudentDashboard({ student, logout }) {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/application/apply",
+        "https://careernexus-backend-2026.onrender.com/application/apply",
         {
           method: "POST",
           headers: {
@@ -272,7 +272,7 @@ function StudentDashboard({ student, logout }) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/student/update/${student.id}`,
+        `https://careernexus-backend-2026.onrender.com/student/update/${student.id}`,
         {
           method: "PUT",
           headers: {

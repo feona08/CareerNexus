@@ -9,7 +9,7 @@ function AdminDashboard({ logout }) {
   const [jobCount, setJobCount] = useState(0);
   const [applicationCount, setApplicationCount] = useState(0);
 useEffect(() => {
-  fetch("http://localhost:5000/admin/dashboard")
+  fetch("https://careernexus-backend-2026.onrender.com/admin/dashboard")
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {

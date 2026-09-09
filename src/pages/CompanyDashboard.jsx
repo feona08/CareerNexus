@@ -24,7 +24,7 @@ function CompanyDashboard({ logout }) {
   const [applicants, setApplicants] = useState([]);
   const applications = applicants.length;
   useEffect(() => {
-  fetch("http://localhost:5000/job/all")
+  fetch("https://careernexus-backend-2026.onrender.com/job/all")
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
@@ -36,7 +36,7 @@ function CompanyDashboard({ logout }) {
     });
 }, []);
 useEffect(() => {
-  fetch("http://localhost:5000/application/all")
+  fetch("https://careernexus-backend-2026.onrender.com/application/all")
     .then((response) => response.json())
     .then((data) => {
       console.log("APPLICATION DATA:", data);
@@ -68,7 +68,7 @@ useEffect(() => {
   }
 
   try {
-    const response = await fetch("http://localhost:5000/job/post", {
+    const response = await fetch("https://careernexus-backend-2026.onrender.com/job/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -116,7 +116,7 @@ useEffect(() => {
   const updateApplicationStatus = async (id, status) => {
   try {
     const response = await fetch(
-      `http://localhost:5000/application/status/${id}`,
+      `https://careernexus-backend-2026.onrender.com/application/status/${id}`,
       {
         method: "PUT",
         headers: {
