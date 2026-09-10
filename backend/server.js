@@ -17,8 +17,6 @@ app.use("/company", companyRoutes);
 app.use("/admin", adminRoutes);
 app.use("/job",jobRoutes);
 app.use("/application", applicationRoutes);
-app.use("/job", jobRoutes);
-
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
@@ -97,18 +95,18 @@ app.post("/login", async (req, res) => {
       });
     }
 
-    // Admin Login
-    if (
-      role === "admin" &&
-      email === "admin@careernexus.com" &&
-      password === "admin123"
-    ) {
-      return res.json({
-        success: true,
-        role: "admin",
-        message: "Admin Login Successful",
-      });
-    }
+   // Placement Officer Login
+if (
+  role === "placementOfficer" &&
+  email === "officer@careernexus.com" &&
+  password === "officer123"
+) {
+  return res.json({
+    success: true,
+    role: "placementOfficer",
+    message: "Placement Officer Login Successful",
+  });
+}
 
     return res.status(401).json({
       success: false,

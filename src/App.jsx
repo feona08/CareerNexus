@@ -4,7 +4,7 @@ import "./App.css";
 import CompanyRegister from "./pages/CompanyRegistration";
 import StudentDashboard from "./pages/StudentDashboard";
 import CompanyDashboard from "./pages/CompanyDashboard";
-import AdminDashboard from "./pages/AdminDashboard";
+import PlacementOfficerDashboard from "./pages/PlacementOfficerDashboard";
 
 function App() {
   const [role, setRole] = useState("student");
@@ -17,17 +17,20 @@ function App() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("https://careernexus-backend-2026.onrender.com/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-          role,
-        }),
-      });
+      const response = await fetch(
+        "https://careernexus-backend-2026.onrender.com/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+            role,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -89,10 +92,10 @@ function App() {
     );
   }
 
-  // Admin Dashboard
-  if (loggedInRole === "admin") {
+  // Placement Officer Dashboard
+  if (loggedInRole === "placementOfficer") {
     return (
-      <AdminDashboard
+      <PlacementOfficerDashboard
         logout={() => setLoggedInRole(null)}
       />
     );
@@ -106,6 +109,7 @@ function App() {
         <p>Smart Placement & Career Ecosystem</p>
 
         <div className="role-buttons">
+
           <button
             className={role === "student" ? "active" : ""}
             onClick={() => setRole("student")}
@@ -121,11 +125,12 @@ function App() {
           </button>
 
           <button
-            className={role === "admin" ? "active" : ""}
-            onClick={() => setRole("admin")}
+            className={role === "placementOfficer" ? "active" : ""}
+            onClick={() => setRole("placementOfficer")}
           >
-            👨‍💼 Admin
+            👨‍💼 Placement Officer
           </button>
+
         </div>
 
         <input
@@ -192,3 +197,4 @@ function App() {
 }
 
 export default App;
+
