@@ -126,6 +126,9 @@ body {
 }
 
 .sidebar-nav .nav-link {
+  font-family: inherit;
+text-align: left;
+cursor: pointer;
   width: 100%;
   min-height: 50px;
 
@@ -1959,4 +1962,187 @@ body {
     width: 122px;
     height: 122px;
   }
+}
+/* =========================================================
+   STUDENT DETAILS - NEW PAGE LAYOUT
+   ========================================================= */
+
+.profile-card + .profile-card {
+  margin-top: 22px;
+}
+
+
+/* =========================================================
+   SELECT DROPDOWN
+   ========================================================= */
+
+.field-group select {
+  width: 100%;
+  height: 43px;
+
+  padding: 0 13px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 9px;
+
+  background: #f8fafc;
+
+  color: #0f172a;
+
+  font-size: 13px;
+
+  outline: none;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.field-group select:focus {
+  border-color: #38bdf8;
+
+  background: white;
+
+  box-shadow:
+    0 0 0 3px rgba(56, 189, 248, 0.12);
+}
+
+
+/* =========================================================
+   ACADEMIC PAGE
+   ========================================================= */
+
+.dashboard-section > .profile-card {
+  width: 100%;
+}
+
+
+/* Keep academic cards comfortable on smaller screens */
+
+@media (max-width: 680px) {
+
+  .dashboard-section > .profile-card {
+    margin-bottom: 18px;
+  }
+
+}
+/* Smart Job Matching */
+.job-match {
+  margin: 16px 0;
+  padding: 14px;
+  background: #f5f8ff;
+  border: 1px solid #dce6ff;
+  border-radius: 12px;
+}
+
+.job-match h4 {
+  margin: 0 0 12px;
+  color: #243b70;
+  font-size: 16px;
+}
+
+.match-progress {
+  width: 100%;
+  height: 9px;
+  background: #dfe5f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.match-progress-fill {
+  height: 100%;
+  background: #3478f6;
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+.match-percentage {
+  margin: 8px 0 14px;
+  font-weight: 700;
+  color: #2458b8;
+}
+
+.matched-skills,
+.missing-skills {
+  margin-top: 12px;
+}
+
+.matched-skills strong {
+  color: #16803d;
+}
+
+.missing-skills strong {
+  color: #b66a00;
+}
+
+.matched-skills p,
+.missing-skills p {
+  margin: 5px 0 0;
+  color: #4b5563;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+/* Smart Job Matching */
+
+.job-match {
+  margin: 16px 0;
+  padding: 14px;
+  background: #f5f8ff;
+  border: 1px solid #dce6ff;
+  border-radius: 12px;
+}
+
+.job-match h4 {
+  margin: 0 0 12px;
+  color: #243b70;
+  font-size: 16px;
+}
+
+.match-progress {
+  width: 100%;
+  height: 9px;
+  background: #dfe5f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.match-progress-fill {
+  height: 100%;
+  background: #3478f6;
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+.match-percentage {
+  font-weight: 700;
+  color: #2458b8;
+  margin: 8px 0 14px;
+}
+
+.matched-skills,
+.missing-skills {
+  margin-top: 12px;
+}
+
+.matched-skills strong {
+  color: #16803d;
+}
+
+.missing-skills strong {
+  color: #b66a00;
+}
+
+.matched-skills p,
+.missing-skills p {
+  margin: 5px 0 0;
+  color: #4b5563;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }

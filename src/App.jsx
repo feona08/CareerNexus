@@ -13,12 +13,13 @@ function App() {
   const [popupMessage, setPopupMessage] = useState("");
   const [loggedInRole, setLoggedInRole] = useState(null);
   const [loggedInStudent, setLoggedInStudent] = useState(null);
+  const [loggedInCompany, setLoggedInCompany] = useState(null);
   const [currentPage, setCurrentPage] = useState("login");
 
   const handleLogin = async () => {
     try {
       const response = await fetch(
-        "https://careernexus-backend-2026.onrender.com/login",
+"http://localhost:5000/login",
         {
           method: "POST",
           headers: {
@@ -40,6 +41,13 @@ function App() {
         if (data.role === "student") {
           setLoggedInStudent(data.student);
         }
+        if (data.role === "student") {
+  setLoggedInStudent(data.student);
+}
+
+if (data.role === "company") {
+  setLoggedInCompany(data.company);
+}
 
         setTimeout(() => {
           setLoggedInRole(data.role);
@@ -85,16 +93,17 @@ function App() {
 
   // Company Dashboard
   if (loggedInRole === "company") {
-    return (
-      <CompanyDashboard
-        logout={() => setLoggedInRole(null)}
-      />
-    );
-  }
+  return (
+    <CompanyDashboard
+      company={loggedInCompany}
+      logout={() => setLoggedInRole(null)}
+    />
+  );
+}
 
   // Placement Officer Dashboard
   if (loggedInRole === "placementOfficer") {
-    return (
+    return(
       <PlacementOfficerDashboard
         logout={() => setLoggedInRole(null)}
       />

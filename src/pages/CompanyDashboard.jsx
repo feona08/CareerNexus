@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";import "./CompanyDashboard.css";
-
-function CompanyDashboard({ logout }) {
-  // Company Profile
-  const [companyName, setCompanyName] = useState("");
-  const [hrName, setHrName] = useState("");
-  const [website, setWebsite] = useState("");
-  const [location, setLocation] = useState("");
-
+import StudentDetailsModal from "../components/StudentDetailsModal";
+function CompanyDashboard({ company, logout }) {  // Company Profile
+  const [companyName, setCompanyName] = useState(company?.companyName || "");
+const [hrName, setHrName] = useState(company?.hrName || "");
+const [website, setWebsite] = useState(company?.website || "");
+const [location, setLocation] = useState(company?.location || "");
   // Dashboard Statistics
   const [selectedStudents] = useState(0);
 
@@ -22,9 +20,10 @@ function CompanyDashboard({ logout }) {
   // Posted Jobs
   const [jobs, setJobs] = useState([]);
   const [applicants, setApplicants] = useState([]);
+  const [selectedApplicant, setSelectedApplicant] = useState(null);
   const applications = applicants.length;
   useEffect(() => {
-  fetch("https://careernexus-backend-2026.onrender.com/job/all")
+    fetch("http://localhost:5000/job/all")
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
@@ -35,8 +34,8 @@ function CompanyDashboard({ logout }) {
       console.error("Error loading jobs:", error);
     });
 }, []);
-useEffect(() => {
-  fetch("https://careernexus-backend-2026.onrender.com/application/all")
+useEffect(()=> {
+  fetch("http://localhost:5000/application/all")
     .then((response) => response.json())
     .then((data) => {
       console.log("APPLICATION DATA:", data);
@@ -68,7 +67,7 @@ useEffect(() => {
   }
 
   try {
-    const response = await fetch("https://careernexus-backend-2026.onrender.com/job/post", {
+    const response = await fetch("http://localhost:5000/job/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -341,53 +340,51 @@ useEffect(() => {
         </p>
 
         <div className="applicant-buttons">
+  <button onClick={() => setSelectedApplicant(applicant)}>
+    👁️ View Student Details
+  </button>
 
-          <button
-            onClick={() =>
-              updateApplicationStatus(
-                applicant._id,
-                "Shortlisted"
-              )
-            }
-          >
-            ✅ Shortlist
-          </button>
+  <button
+    onClick={() =>
+      updateApplicationStatus(applicant._id, "Shortlisted")
+    }
+  >
+    ✅ Shortlist
+  </button>
 
-          <button
-            onClick={() =>
-              updateApplicationStatus(
-                applicant._id,
-                "Rejected"
-              )
-            }
-          >
-            ❌ Reject
-          </button>
-
-        </div>
-
+  <button
+    onClick={() =>
+      updateApplicationStatus(applicant._id, "Rejected")
+    }
+  >
+    ❌ Reject
+  </button>
+</div>
       </div>
     ))
   )}
 
 </div>
-  
+{selectedApplicant && (
+  <StudentDetailsModal
+    applicant={selectedApplicant}
+    onClose={() => setSelectedApplicant(null)}
+  />
+)}
 
-      {/* Logout */}
+{/* Logout */}
 
-      <div className="logout-section">
+<div className="logout-section">
+  <button
+    className="logout-btn"
+    onClick={logout}
+  >
+    🚪 Logout
+  </button>
+</div>
 
-        <button
-          className="logout-btn"
-          onClick={logout}
-        >
-          🚪 Logout
-        </button>
-
-      </div>
-
-    </div>
-  );
+</div>
+);
 }
 
 export default CompanyDashboard;

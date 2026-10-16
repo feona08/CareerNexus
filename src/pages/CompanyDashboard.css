@@ -64,11 +64,37 @@ button:hover {
 }
 
 .stat-card {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 30px;
-  transition: 0.3s;
+  .stat-card {
+  min-height: 125px;
+  box-sizing: border-box;
+  padding: 22px 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.stat-card h2 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  line-height: 1;
+  color: #2563eb;
+}
+
+.stat-card p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+}
 }
 
 .stat-card:hover {
@@ -107,4 +133,261 @@ button:hover {
   font-size: 20px;
   border-radius: 50px;
   text-align: center;
+}
+@media (max-width: 800px) {
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+}
+/* ===== TOP STATISTICS ALIGNMENT ===== */
+
+.company-dashboard .stats-container {
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+  margin: 25px 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  align-items: stretch !important;
+}
+
+.company-dashboard .stat-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 130px !important;
+  margin: 0 !important;
+  padding: 25px !important;
+  box-sizing: border-box !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  text-align: center !important;
+
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+.company-dashboard .stat-card h2 {
+  margin: 0 0 8px !important;
+  padding: 0 !important;
+  font-size: 32px !important;
+  line-height: 1 !important;
+  color: #2563eb !important;
+}
+
+.company-dashboard .stat-card p {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 800px) {
+  .company-dashboard .stats-container {
+    grid-template-columns: 1fr !important;
+  }
+}
+/* =========================================
+   PROFESSIONAL COMPANY DASHBOARD LAYOUT
+   ========================================= */
+
+.company-dashboard {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 35px 45px 50px;
+  box-sizing: border-box;
+}
+
+/* Dashboard heading */
+
+.company-dashboard > h1 {
+  width: 100%;
+  margin: 0 0 30px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* =========================================
+   STATISTICS
+   ========================================= */
+
+.company-dashboard .stats-container {
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 22px !important;
+
+  margin: 0 0 28px !important;
+  padding: 0 !important;
+
+  box-sizing: border-box !important;
+}
+
+.company-dashboard .stat-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 125px !important;
+
+  margin: 0 !important;
+  padding: 22px !important;
+
+  box-sizing: border-box !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  text-align: center !important;
+
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08) !important;
+}
+
+.company-dashboard .stat-card h2 {
+  margin: 0 0 8px !important;
+  font-size: 30px !important;
+  line-height: 1 !important;
+  color: #2563eb !important;
+}
+
+.company-dashboard .stat-card p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
+}
+
+/* =========================================
+   ALL DASHBOARD CARDS
+   ========================================= */
+
+.company-dashboard > .card {
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 0 25px !important;
+  padding: 28px !important;
+
+  box-sizing: border-box !important;
+
+  border-radius: 16px !important;
+}
+
+/* Card headings */
+
+.company-dashboard > .card > h2 {
+  margin: 0 0 22px;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+/* =========================================
+   COMPANY PROFILE
+   ========================================= */
+
+.company-dashboard > .card input,
+.company-dashboard > .card textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   POSTED JOBS
+   ========================================= */
+
+.company-dashboard .job-card {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+/* =========================================
+   APPLICANTS
+   ========================================= */
+
+.company-dashboard .applicant-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.company-dashboard .applicant-buttons button {
+  min-height: 40px;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* =========================================
+   LOGOUT
+   ========================================= */
+
+.company-dashboard .logout-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 900px) {
+
+  .company-dashboard {
+    padding: 25px 20px 40px;
+  }
+
+  .company-dashboard .stats-container {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .company-dashboard .stat-card {
+    height: 110px !important;
+    padding: 15px !important;
+  }
+
+  .company-dashboard .stat-card h2 {
+    font-size: 25px !important;
+  }
+}
+
+@media (max-width: 650px) {
+
+  .company-dashboard {
+    padding: 20px 12px 35px;
+  }
+
+  .company-dashboard .stats-container {
+    grid-template-columns: 1fr !important;
+  }
+
+  .company-dashboard .stat-card {
+    height: 100px !important;
+  }
+
+  .company-dashboard > .card {
+    padding: 20px !important;
+  }
 }
