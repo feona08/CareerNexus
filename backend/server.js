@@ -7,6 +7,7 @@ const companyRoutes = require("./routes/companyRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const jobRoutes = require("./routes/jobRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
+const placementOfficerRoutes = require("./routes/placementOfficerRoutes");
 const app = express();
 
 app.use(cors());
@@ -17,6 +18,7 @@ app.use("/company", companyRoutes);
 app.use("/admin", adminRoutes);
 app.use("/job",jobRoutes);
 app.use("/application", applicationRoutes);
+app.use("/placement-officer", placementOfficerRoutes);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
@@ -30,43 +32,69 @@ app.post("/login", async (req, res) => {
   try {
     const { email, password, role } = req.body;
 
-    // Student Login
-    if (role === "student") {
-      const Student = require("./models/Student");
+   
+// Student Login
+if (role === "student") {
+  const Student = require("./models/Student");
 
-      const student = await Student.findOne({ email });
+  const normalizedEmail = email.trim().toLowerCase();
 
-      if (!student) {
-        return res.status(401).json({
-          success: false,
-          message: "Student not found",
-        });
-      }
+  console.log("LOGIN EMAIL RECEIVED:", normalizedEmail);
+  console.log("DATABASE:", mongoose.connection.name);
+  console.log("COLLECTION:", Student.collection.name);
 
-      if (student.password !== password) {
-        return res.status(401).json({
-          success: false,
-          message: "Incorrect password",
-        });
-      }
+  // Check registered students
+  const allStudents = await Student.find({}, { email: 1 });
 
-      return res.json({
-        success: true,
-        role: "student",
-        message: "Student Login Successful",
-        student: {
-          id: student._id,
-          name: student.name,
-          email: student.email,
-          department: student.department,
-          year: student.year,
-          cgpa: student.cgpa,
-          linkedin: student.linkedin,
-          github: student.github,
-          skills: student.skills,
-        },
-      });
-    }
+  console.log("TOTAL STUDENTS:", allStudents.length);
+
+  allStudents.forEach((s) => {
+    console.log("SAVED EMAIL:", s.email);
+  });
+
+  // Find student
+  const student = await Student.findOne({
+    email: normalizedEmail,
+  });
+
+  console.log(
+    "STUDENT FOUND:",
+    student ? student.email : "NO STUDENT FOUND"
+  );
+
+  if (!student) {
+    return res.status(401).json({
+      success: false,
+      message: "Student not found",
+    });
+  }
+
+  if (student.password !== password) {
+    return res.status(401).json({
+      success: false,
+      message: "Incorrect password",
+    });
+  }
+
+  return res.json({
+    success: true,
+    role: "student",
+    message: "Student Login Successful",
+    student: {
+      id: student._id,
+      name: student.name,
+      email: student.email,
+      department: student.department,
+      year: student.year,
+      cgpa: student.cgpa,
+      linkedin: student.linkedin,
+      github: student.github,
+      skills: student.skills,
+    },
+  });
+}
+
+
 
     // Company Login
     if (role === "company") {

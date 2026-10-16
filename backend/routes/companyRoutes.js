@@ -81,10 +81,18 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    res.json({
-      success: true,
-      message: "Company Login Successful",
-    });
+   res.json({
+  success: true,
+  message: "Company Login Successful",
+  company: {
+    id: company._id,
+    companyName: company.companyName,
+    hrName: company.hrName,
+    email: company.email,
+    website: company.website,
+    location: company.location,
+  },
+});
 
   } catch (error) {
 
