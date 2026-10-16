@@ -18,8 +18,8 @@ function App() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(
-"http://localhost:5000/login",
+      const response = await 
+fetch("https://careernexus-backend-2026.onrender.com/login", 
         {
           method: "POST",
           headers: {
@@ -38,9 +38,6 @@ function App() {
       if (data.success) {
         setPopupMessage(data.message);
 
-        if (data.role === "student") {
-          setLoggedInStudent(data.student);
-        }
         if (data.role === "student") {
   setLoggedInStudent(data.student);
 }
