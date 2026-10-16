@@ -2,90 +2,92 @@ const express = require("express");
 const router = express.Router();
 
 const Job = require("../models/Job");
+const Student = require("../models/Student");
+const Notification = require("../models/Notification");
 
 // ==========================
-// POST A JOB
+// POST A JOB + CREATE NOTIFICATIONS
 // ==========================
 
 router.post("/post", async (req, res) => {
-  try {
-    const {
-      companyName,
-      jobTitle,
-      package: jobPackage,
-      location,
-      skills,
-      experience,
-      lastDate,
-      description,
-    } = req.body;
+try {
+const {
+companyName,
+jobTitle,
+package: jobPackage,
+location,
+skills,
+experience,
+lastDate,
+description,
+} = req.body;
 
-    if (
-      !companyName ||
-      !jobTitle ||
-      !jobPackage ||
-      !location ||
-      !skills ||
-      !experience ||
-      !lastDate ||
-      !description
-    ) {
-      return res.status(400).json({
-        success: false,
-        message: "Please fill all job details.",
-      });
-    }
 
-    const job = new Job({
-      companyName,
-      jobTitle,
-      package: jobPackage,
-      location,
-      skills,
-      experience,
-      lastDate,
-      description,
-    });
+if (
+  !companyName ||
+  !jobTitle ||
+  !jobPackage ||
+  !location ||
+  !skills ||
+  !experience ||
+  !lastDate ||
+  !description
+) {
+  return res.status(400).json({
+    success: false,
+    message: "Please fill all job details.",
+  });
+}
 
-    await job.save();
+// Save the job first
+const job = new Job({
+  companyName,
+  jobTitle,
+  package: jobPackage,
+  location,
+  skills,
+  experience,
+  lastDate,
+  description,
+});
 
-    res.status(201).json({
-      success: true,
-      message: "Job Posted Successfully",
-      job: job,
-    });
+await job.save();
 
-  } catch (error) {
-    console.error("Job posting error:", error);
+// Find all registered students
+const students = await Student.find({}, "_id");
 
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
+// Create a notification for each student
+if (students.length > 0) {
+  const notifications = students.map((student) => ({
+    studentId: student._id,
+    jobId: job._id,
+    message: `New job posted: ${jobTitle} at ${companyName}`,
+    isRead: false,
+  }));
+
+  await Notification.insertMany(notifications);
+}
+
+return res.status(201).json({
+  success: true,
+  message: "Job posted successfully and student notifications created.",
+  job,
+  notificationsCreated: students.length,
+});
+
+
+} catch (error) {
+console.error("Job posting/notification error:", error);
+
+
+return res.status(500).json({
+  success: false,
+  message: error.message,
+});
+
+
+}
 });
 
 // ==========================
-// GET ALL JOBS
-// ==========================
-
-router.get("/all", async (req, res) => {
-  try {
-    const jobs = await Job.find().sort({ createdAt: -1 });
-
-    res.json({
-      success: true,
-      jobs: jobs,
-    });
-
-  } catch (error) {
-    console.error("Fetching jobs error:", error);
-
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-});
-
-module.exports = router;
+// GE
